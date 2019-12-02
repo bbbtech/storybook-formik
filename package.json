@@ -5,9 +5,11 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "tsc",
     "build:watch": "npm run build -- --watch",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "storybook": "start-storybook -p 6006"
   },
   "files": [
     "dist"
@@ -19,10 +21,17 @@
     "react-dom": "*"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.0.0",
+    "@babel/core": "^7.7.4",
+    "@storybook/addon-actions": "^3.4.12",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8",
+    "@types/node": "^12.12.14",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "@types/storybook__addon-actions": "^3.0.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
     "formik": "^1.5.8",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

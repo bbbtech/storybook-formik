@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Field } from 'formik';
-import withFormik from 'storybook-formik';
+import withFormik from '../src';
 
 storiesOf('Example', module)
   .addDecorator(
-    withFormik<any>({
+    withFormik({
       initialValues: {
         firstName: 'John',
       },

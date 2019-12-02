@@ -5,6 +5,9 @@ module.exports = ({ config }) => {
     use: [
       {
         loader: require.resolve('awesome-typescript-loader'),
+        options: {
+          configFileName: 'tsconfig.storybook.json',
+        },
       },
     ],
   });
