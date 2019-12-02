@@ -1,0 +1,40 @@
+{
+  "name": "storybook-formik",
+  "version": "1.0.0",
+  "description": "A storybook decorator that allows you to use components in your stories that rely on Formik context.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "npm run build -- --watch",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@storybook/addon-actions": "^4.0.0||^5.0.0",
+    "formik": "^1.0.0",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.0.0",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "@types/storybook__addon-actions": "^3.0.0",
+    "formik": "^1.5.8",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "typescript": "^3.7.2"
+  },
+  "keywords": [
+    "storybook",
+    "react",
+    "formik",
+    "form",
+    "forms"
+  ],
+  "author": "bhishp",
+  "license": "MIT"
+}
