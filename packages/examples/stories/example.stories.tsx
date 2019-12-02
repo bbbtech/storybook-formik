@@ -9,8 +9,6 @@ storiesOf('Example', module)
       initialValues: {
         firstName: 'John',
       },
-    }),
+    })
   )
-  .add('default', () =>
-    <Field name="firstName" type="input" />
-  );
+  .add('default', () => <Field name="firstName" type="input" />);
