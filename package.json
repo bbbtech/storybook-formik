@@ -8,7 +8,7 @@
     "clean": "rm -rf dist",
     "build": "tsc",
     "build:watch": "npm run build -- --watch",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push && git push --tags && npm publish",
     "storybook": "start-storybook -p 6006"
   },
   "files": [
