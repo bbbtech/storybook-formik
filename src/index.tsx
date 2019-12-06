@@ -1,7 +1,12 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import addons, { makeDecorator } from '@storybook/addons';
-import {ConfigWithoutSubmit, EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT} from './shared';
+import {
+  ConfigWithoutSubmit,
+  EVT_ON_SUBMIT,
+  EVT_RENDER,
+  EVT_SUBMIT,
+} from './shared';
 
 export const withFormik = makeDecorator({
   name: 'withFormik',
@@ -22,20 +27,33 @@ export const withFormik = makeDecorator({
         initialValues={formikConfig.initialValues || {}}
         {...formikConfig}
       >
-        {({ values, errors, touched, status, isValidating, isSubmitting, submitCount, submitForm }) => {
-          channel.emit(EVT_RENDER, { values, errors, touched, status, isValidating, isSubmitting, submitCount });
+        {({
+          values,
+          errors,
+          touched,
+          status,
+          isValidating,
+          isSubmitting,
+          submitCount,
+          submitForm,
+        }) => {
+          channel.emit(EVT_RENDER, {
+            values,
+            errors,
+            touched,
+            status,
+            isValidating,
+            isSubmitting,
+            submitCount,
+          });
           if (!submitter) {
             submitter = submitForm;
           }
-          return (
-            <Form>
-                {getStory(context)}
-            </Form>
-          );
+          return <Form>{getStory(context)}</Form>;
         }}
       </Formik>
     );
-  }
+  },
 });
 
 export default withFormik;

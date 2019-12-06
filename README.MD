@@ -10,7 +10,7 @@ A [Storybook](https://storybook.js.org/) decorator that will allow you to render
 
 Suppose you split your forms into smaller, re-usable components and these 'sub-forms' rely on formik context, each of these
 sub-forms may be used to build up a larger form, but we still want to test and run them independently. We can use the withFormik
-decorator so that we can wrap the subform in a Formik component, which will pass down the context as normal. 
+decorator so that we can wrap the subform in a Formik component, which will pass down the context as normal.
 
 ```js
 import React from 'react';
@@ -51,7 +51,7 @@ storiesOf('Example', module)
 The decorator accepts the `Formik` component props as an argument, so you can pass initialValues, validationSchema,
 validateOnBlur, etc. as you please.
 
-If you do not pass an onSubmit function then storybook-actions is used to render submission in the Action Logger. 
+If you do not pass an onSubmit function then storybook-actions is used to render submission in the Action Logger.
 
 ## Live State Updates
 
@@ -75,12 +75,14 @@ interface PersonalInfoSubformValues {
 
 storiesOf('Example', module)
   .addDecorator(
-    withFormik<PersonalInfoSubformValues>({
-      initialValues: {
-        forename: 'John',
-        surname: 'Johnerson',
-      },
-    })
+    withFormik <
+      PersonalInfoSubformValues >
+      {
+        initialValues: {
+          forename: 'John',
+          surname: 'Johnerson',
+        },
+      }
   )
   .add('default', () => <PersonalInfoSubform />);
 ```
