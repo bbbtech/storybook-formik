@@ -12,7 +12,8 @@
     "storybook": "start-storybook -p 6006"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "register.js"
   ],
   "peerDependencies": {
     "formik": "^1.0.0",
