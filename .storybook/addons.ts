@@ -1,1 +1,1 @@
-import '@storybook/addon-actions/register';
+import '../dist/register';

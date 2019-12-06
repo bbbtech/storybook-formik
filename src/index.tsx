@@ -1,76 +1,41 @@
-import React, { Fragment } from 'react';
-import { Formik, Form, FormikConfig, FormikValues } from 'formik';
-// import { RenderFunction } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react';
+import { Formik, Form } from 'formik';
+import addons, { makeDecorator } from '@storybook/addons';
+import {ConfigWithoutSubmit, EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT} from './shared';
 
-const style = {
-  heading: {
-    margin: '1rem 0',
-    fontSize: '3rem',
-    fontWeight: 700,
-  },
-};
+export const withFormik = makeDecorator({
+  name: 'withFormik',
+  parameterName: 'formik',
+  skipIfNoParametersOrOptions: false,
+  wrapper: (getStory, context, { parameters }) => {
+    const channel = addons.getChannel();
+    let submitter: () => void;
+    channel.on(EVT_SUBMIT, () => submitter && submitter());
+    const formikConfig = parameters as ConfigWithoutSubmit;
 
-type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-type ConfigWithoutSubmit<Values> = PartialBy<FormikConfig<Values>, 'onSubmit'>;
+    return (
+      <Formik
+        onSubmit={(v, { setSubmitting }) => {
+          channel.emit(EVT_ON_SUBMIT, v);
+          setSubmitting(false);
+        }}
+        initialValues={formikConfig.initialValues || {}}
+        {...formikConfig}
+      >
+        {({ values, errors, touched, status, isValidating, isSubmitting, submitCount, submitForm }) => {
+          channel.emit(EVT_RENDER, { values, errors, touched, status, isValidating, isSubmitting, submitCount });
+          if (!submitter) {
+            submitter = submitForm;
+          }
+          return (
+            <Form>
+                {getStory(context)}
+            </Form>
+          );
+        }}
+      </Formik>
+    );
+  }
+});
 
-export default <Values extends FormikValues>(
-  config: ConfigWithoutSubmit<Values>
-) => (storyFn: any) => (
-  <Formik<Values> onSubmit={action('on-submit')} {...config}>
-    {x => {
-      const { values } = x;
-      return (
-        <Form>
-          <div
-            style={{
-              padding: '8px',
-            }}
-          >
-            {storyFn()}
-          </div>
-          <div
-            style={{
-              padding: '8px',
-              backgroundColor: '#e2e2e2',
-              borderTop: '1px solid black',
-              width: '100%',
-            }}
-          >
-            <div style={style.heading}>Formik decorator</div>
-            <button
-              style={{
-                backgroundColor: 'white',
-                border: '1px solid #e4e4e4',
-                borderRadius: '4px',
-                padding: '8px',
-              }}
-              type="submit"
-            >
-              Submit Formik
-            </button>
-            <div style={style.heading}>Values</div>
-            {JSON.stringify(values, null, 2)
-              .split('')
-              .map((x, i) =>
-                x === '{' ? (
-                  <Fragment key={`${x}-${i}`}>
-                    &#123; <br />
-                  </Fragment>
-                ) : x === '}' ? (
-                  <Fragment key={`${x}-${i}`}>
-                    <br />
-                    &#125;
-                  </Fragment>
-                ) : x === ',' ? (
-                  <br key={`${x}-${i}`} />
-                ) : (
-                  x
-                )
-              )}
-          </div>
-        </Form>
-      );
-    }}
-  </Formik>
-);
+export default withFormik;
