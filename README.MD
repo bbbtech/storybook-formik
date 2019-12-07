@@ -1,16 +1,30 @@
 # storybook-formik
 
-A [Storybook](https://storybook.js.org/) decorator that will allow you to render Formik Fields/Components that are reliant on the existence of Formik context
+A [Storybook](https://storybook.js.org/) Addon and Decorator to wrap Formik Fields and track their state in a Panel.
+
+![example screenshot](./screen-app.png)
+
+Thanks to [@jaredpalmer](https://jaredpalmer.com/) for giving us the amazing [formik](https://github.com/jaredpalmer/formik) library and making forms great again.
 
 ## Install
 
-    npm install --save-dev storybook-formik
+```js
+npm install --save-dev storybook-formik
+```
+
+Then register the addon in `.storybook/addons.js`
+
+```js
+import 'storybook-formik/register';
+```
 
 ## Usage
 
-Suppose you split your forms into smaller, re-usable components and these 'sub-forms' rely on formik context, each of these
-sub-forms may be used to build up a larger form, but we still want to test and run them independently. We can use the withFormik
+Suppose you split your forms into smaller, re-usable components and these 'subforms' rely on formik context, each of these
+sub-forms may be used to build up a larger form, but you still want to test and run them independently. You can use the withFormik
 decorator so that we can wrap the subform in a Formik component, which will pass down the context as normal.
+
+Given a simple subform:
 
 ```js
 import React from 'react';
@@ -26,7 +40,7 @@ const PersonalInfoSubform = () => (
 export default PersonalInfoSubform;
 ```
 
-you can add the `withFormik` decorator to your story this way:
+You add the `withFormik` decorator to your stories and can pass any `Formik` props as a parameter to the individual story.
 
 ```js
 import { storiesOf } from '@storybook/react';
@@ -35,54 +49,37 @@ import withFormik from 'storybook-formik';
 import PersonalInfoSubform from '<your_component_path>/PersonalInfoSubform';
 
 storiesOf('Example', module)
-  .addDecorator(
-    withFormik({
+  .addDecorator(withFormik)
+  .add('default', () => <PersonalInfoSubform />, {
+    formik: {
       initialValues: {
         forename: 'John',
         surname: 'Johnerson',
       },
-    })
-  )
-  .add('default', () => <PersonalInfoSubform />);
+    },
+  });
 ```
+
+This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
+within the storybook panel below.
 
 ## Arguments
 
-The decorator accepts the `Formik` component props as an argument, so you can pass initialValues, validationSchema,
-validateOnBlur, etc. as you please.
+You can pass any `Formik` component props (initialValues, validationSchema, validateOnBlur, etc) as arguments to a story.
+These props must be passed under the `formik` parameter key.
 
-If you do not pass an onSubmit function then storybook-actions is used to render submission in the Action Logger.
-
-## Live State Updates
-
-The decorator will track the internal formik state and render values in the storybook Formik panel.
-
-## Typescript-ready
-
-Like Formik, this is built in Typescript. If you want to be more strict on your stories you can use the generic syntax
-as such:
+If no initial values are supplied, `{}` will be used.
 
 ```js
-import { storiesOf } from '@storybook/react';
-import withFormik from 'storybook-formik';
-
-import PersonalInfoSubform from '<your_component_path>/PersonalInfoSubform';
-
-interface PersonalInfoSubformValues {
-  forename?: string;
-  surname?: string;
-}
-
-storiesOf('Example', module)
-  .addDecorator(
-    withFormik <
-      PersonalInfoSubformValues >
-      {
-        initialValues: {
-          forename: 'John',
-          surname: 'Johnerson',
-        },
-      }
-  )
-  .add('default', () => <PersonalInfoSubform />);
+.add('MyTextInput', () => (
+    <MyTextInput name="formikTweet" label="Describe formik in 80 characters" placeholder="I love formik because..." />
+  ), {
+    formik: {
+      initialValues: {
+        formikTweet: '',
+      },
+      validationSchema: someSchema,
+      onSubmit: (v) => console.log('I want to log these... ', v),
+    }
+  });
 ```
