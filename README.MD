@@ -2,7 +2,7 @@
 
 A [Storybook](https://storybook.js.org/) Addon and Decorator to wrap Formik Fields and track their state in a Panel.
 
-![example screenshot](./screen-app.png)
+![example screenshot](https://user-images.githubusercontent.com/12024258/70381969-9c13b400-194b-11ea-8444-582933bf30f5.png)
 
 Thanks to [@jaredpalmer](https://jaredpalmer.com/) for giving us the amazing [formik](https://github.com/jaredpalmer/formik) library and making forms great again.
 
