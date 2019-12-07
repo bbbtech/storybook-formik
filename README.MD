@@ -63,7 +63,7 @@ storiesOf('Example', module)
 This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
 within the storybook panel below.
 
-See stories/example.stories.tsx for further examples
+See [stories/example.stories.tsx](https://github.com/bhishp/storybook-formik/blob/master/stories/example.stories.tsx) for further examples
 
 ## Arguments
 
