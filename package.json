@@ -17,7 +17,7 @@
     "register.js"
   ],
   "peerDependencies": {
-    "formik": "^1.0.0",
+    "formik": "^1.0.0|^2.0.0",
     "react": "*",
     "react-dom": "*"
   },
@@ -35,7 +35,7 @@
     "@types/yup": "^0.26.26",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "formik": "^1.5.8",
+    "formik": "^2.0.6",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

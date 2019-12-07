@@ -2,49 +2,102 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import withFormik from '../dist';
 import {
-  PersonalInfo,
+  PersonalInfoSubForm,
   personalInfoInitialValues,
   personalInfoValidationSchema,
-  ProfessionalInfo, professionalInfoInitialValues, professionalInfoValidationSchema,
-  SignupForm
+  ProfessionalInfoSubForm,
+  professionalInfoInitialValues,
+  professionalInfoValidationSchema,
+  SignupForm,
+  MyCheckbox,
+  MySelect,
+  MyTextInput,
+  FeedbackSubform, feedbackInitialValues
 } from './example';
-import {DecoratorParams} from "../src/shared";
+import { DecoratorParams } from '../src/shared';
 
-const personalInfoParameters: DecoratorParams = {
+const personalInfoParams: DecoratorParams = {
   formik: {
     initialValues: personalInfoInitialValues,
     validationSchema: personalInfoValidationSchema,
   }
 };
 
-const professionalInfoParameters: DecoratorParams = {
+const professionalInfoParams: DecoratorParams = {
   formik: {
     initialValues: professionalInfoInitialValues,
     validationSchema: professionalInfoValidationSchema,
   }
 };
 
-storiesOf('Example/decorated', module)
+const feedbackParams: DecoratorParams = {
+  formik: {
+    initialValues: feedbackInitialValues,
+    validationSchema: personalInfoValidationSchema,
+  }
+};
+
+storiesOf('Example/subforms', module)
   .addDecorator(withFormik)
-  .add('PersonalInfo', () => (
+  .add('PersonalInfoSubform', () => (
     <>
       <p>
         The decorator can wrap Components that include Fields (or anything else expecting Formik context).
         This allows us to better componentise our larger forms.
       </p>
-      <PersonalInfo />
+      <PersonalInfoSubForm />
     </>
-  ), personalInfoParameters)
-  .add('ProfessionalInfo', () => (
+  ), personalInfoParams)
+  .add('ProfessionalInfoSubform', () => (
     <>
-      <ProfessionalInfo />
+      <p>
+        Here we can play with the Professional Info subform as standalone
+      </p>
+      <ProfessionalInfoSubForm />
     </>
-  ), professionalInfoParameters)
-  .add('Override onSubmit', () => (
+  ), professionalInfoParams)
+  .add('FeedbackSubform', () => (
     <>
-      <ProfessionalInfo />
+      <p>
+        With better tooling it makes it easier for us to componentise and compose our subforms.
+        Here we re-use the above PersonalInfoSubform in our FeedbackSubform.
+      </p>
+      <FeedbackSubform />
     </>
-  ), { formik: { onSubmit: () => console.log('log here instead if use action-logger')}});
+  ), feedbackParams);
+
+// You may want to demonstrate a library of your custom-made fields
+storiesOf('Example/MyFields', module)
+  .addDecorator(withFormik)
+  .add('MyCheckbox', () => (<MyCheckbox name="likeFormik">Do you like formik?</MyCheckbox>), {
+    formik: {
+      initialValues: {
+        likeFormik: true,
+      }
+    }
+  })
+  .add('MySelect', () => (
+    <MySelect name="formikRating" label="How much do you like formik?" >
+      <option value={3}>I like it</option>
+      <option value={4}>I really like it</option>
+      <option value={5}>I absolutely love it</option>
+    </MySelect>
+  ), {
+    formik: {
+      initialValues: {
+        formikRating: 5,
+      }
+    }
+  })
+  .add('MyTextInput', () => (
+    <MyTextInput name="formikTweet" label="Describe formik in 80 characters" placeholder="I love formik because..." />
+  ), {
+    formik: {
+      initialValues: {
+        formikTweet: '',
+      }
+    }
+  });
 
 storiesOf('Example/standard', module)
   .add('default', () => (

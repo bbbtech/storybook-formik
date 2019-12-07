@@ -1,5 +1,5 @@
 import React, {CSSProperties} from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, useField, Field } from 'formik';
 import * as Yup from 'yup';
 
 // example adapted from official Formik docs: https://jaredpalmer.com/formik/docs/tutorial#leveraging-react-context
@@ -12,6 +12,13 @@ export const personalInfoInitialValues = {
 
 export const professionalInfoInitialValues = {
   jobType: '',
+  acceptedTerms: false,
+};
+
+export const feedbackInitialValues = {
+  ...personalInfoInitialValues,
+  rating: 1,
+  remarks: ''
 };
 
 const initialValues = {
@@ -38,6 +45,9 @@ export const professionalInfoValidationSchema = Yup.object({
       'Invalid Job Type'
     )
     .required('Required'),
+  acceptedTerms: Yup.boolean()
+    .required('Required')
+    .oneOf([true], 'You must accept the terms and conditions.'),
 });
 
 const validationSchema = Yup.object().concat(personalInfoValidationSchema).concat(professionalInfoValidationSchema);
@@ -54,7 +64,7 @@ const style: { [key: string]: CSSProperties } = {
     display: 'block',
     fontWeight: 'bold',
   },
-  textField: {
+  field: {
     display: 'block'
   },
   error: {
@@ -63,33 +73,53 @@ const style: { [key: string]: CSSProperties } = {
   }
 };
 
-export const MySelect = ({children, ...props}: any) => {
+export const MyCheckbox = ({ children, ...props }: any) => {
+  // We need to tell useField what type of input this is
+  // since React treats radios and checkboxes differently
+  // than inputs/select/textarea.
+  const [field, meta] = useField({ ...props, type: 'checkbox' });
+  return (
+    <>
+      <label style={style.label} >
+        <input type="checkbox" {...field} {...props} />
+        {children}
+      </label>
+      {meta.touched && meta.error ? (
+        <div style={style.error}>{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
+
+export const MySelect = (props: any) => {
+  const [field, meta] = useField(props);
   return (
     <>
       <label style={style.label} htmlFor={props.id || props.name}>{props.label}</label>
-      <Field component="select" {...props}>
-        {children}
-      </Field>
-      <div style={style.error}>
-        <ErrorMessage name={props.name} />
-      </div>
+      <select style={style.field} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div style={style.error}>{meta.error}</div>
+      ) : null}
     </>
   );
 };
 
 export const MyTextInput = (props: any) => {
+  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+  // which we can spread on <input> and also replace ErrorMessage entirely.
+  const [field, meta] = useField(props);
   return (
     <>
       <label style={style.label} htmlFor={props.id || props.name}>{props.label}</label>
-      <Field style={style.textField} {...props}/>
-      <div style={style.error}>
-        <ErrorMessage name={props.name} />
-      </div>
+      <input style={style.field} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div style={style.error}>{meta.error}</div>
+      ) : null}
     </>
   );
 };
 
-export const ProfessionalInfo = () => (
+export const ProfessionalInfoSubForm = () => (
   <>
     <MySelect label="Job Type" name="jobType">
       <option value="">Select a job type</option>
@@ -98,10 +128,13 @@ export const ProfessionalInfo = () => (
       <option value="product">Product Manager</option>
       <option value="other">Other</option>
     </MySelect>
+    <MyCheckbox name="acceptedTerms">
+      I accept the terms and conditions
+    </MyCheckbox>
   </>
 );
 
-export const PersonalInfo = () => (
+export const PersonalInfoSubForm = () => (
   <>
     <MyTextInput
       label="First Name"
@@ -124,6 +157,20 @@ export const PersonalInfo = () => (
   </>
 );
 
+export const FeedbackSubform = () => (
+  <>
+    <PersonalInfoSubForm />
+    <label style={style.label} htmlFor="rating">How good?</label>
+    <Field style={style.field} component="select" name="rating">
+      <option value={0}>Bad</option>
+      <option value={1}>Neutral</option>
+      <option value={2}>Good</option>
+    </Field>
+    <label style={style.label} htmlFor="remarks">Why so good?</label>
+    <Field style={style.field} component="textarea" name="remarks" />
+  </>
+);
+
 export const SignupForm = () => {
   return (
     <>
@@ -134,8 +181,8 @@ export const SignupForm = () => {
         onSubmit={onSubmit}
       >
         <Form>
-          <PersonalInfo />
-          <ProfessionalInfo />
+          <PersonalInfoSubForm />
+          <ProfessionalInfoSubForm />
           <button type="submit">Submit</button>
         </Form>
       </Formik>
