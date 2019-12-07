@@ -78,14 +78,14 @@ storiesOf('Example/MyFields', module)
   })
   .add('MySelect', () => (
     <MySelect name="formikRating" label="How much do you like formik?" >
-      <option value={3}>I like it</option>
-      <option value={4}>I really like it</option>
-      <option value={5}>I absolutely love it</option>
+      <option value="3">I like it</option>
+      <option value="4">I really like it</option>
+      <option value="5">I absolutely love it</option>
     </MySelect>
   ), {
     formik: {
       initialValues: {
-        formikRating: 5,
+        formikRating: "5",
       }
     }
   })

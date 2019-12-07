@@ -1,10 +1,10 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { FormikState } from 'formik';
 import JSONTree from 'react-json-tree';
-import { useAddonState, useChannel } from '@storybook/api';
+import { useChannel } from '@storybook/api';
 import { STORY_RENDERED } from '@storybook/core-events';
 
-import { ADDON_ID, EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
+import { EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
 
 const trafficLightStyle: CSSProperties = {
   display: 'inline-block',
@@ -109,13 +109,10 @@ const eightiesTheme = {
 type Values = any;
 
 export const FormikPanel = () => {
-  const [formikState, setFormikState] = useAddonState<
-    FormikState<Values> | Partial<FormikState<Values>>
-  >(`${ADDON_ID}/f-state`, {});
-  const [submittedValues, setSubmittedValues] = useAddonState<Values[]>(
-    `${ADDON_ID}/submissions`,
-    []
+  const [formikState, setFormikState] = useState<Partial<FormikState<Values>>>(
+    {}
   );
+  const [submittedValues, setSubmittedValues] = useState<Values[]>([]);
 
   const emit = useChannel({
     [STORY_RENDERED]: async id => await setSubmittedValues([]),
