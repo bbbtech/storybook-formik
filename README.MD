@@ -63,6 +63,8 @@ storiesOf('Example', module)
 This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
 within the storybook panel below.
 
+See stories/example.stories.tsx for further examples
+
 ## Arguments
 
 You can pass any `Formik` component props (initialValues, validationSchema, validateOnBlur, etc) as arguments to a story.
