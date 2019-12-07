@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import { FormikState } from 'formik';
+import JSONTree from 'react-json-tree';
 import { useAddonState, useChannel } from '@storybook/api';
 import { STORY_RENDERED } from '@storybook/core-events';
-import JSONTree from 'react-json-tree';
 
 import { ADDON_ID, EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
 
@@ -80,8 +80,9 @@ const style: { [key: string]: CSSProperties } = {
 const classRoot = 'formik-';
 const stateContainerClass = `${classRoot}stateContainer`;
 const injectCss = `.${stateContainerClass} > ul {
-    height: 100%;
-    margin: 0;
+    height: 100% !important;
+    margin: 0 !important;
+    overflow-y: scroll !important;
   }`;
 
 const eightiesTheme = {
