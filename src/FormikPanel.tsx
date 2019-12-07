@@ -58,7 +58,7 @@ const style: { [key: string]: CSSProperties } = {
     height: '32px',
     alignItems: 'center',
     boxShadow: 'rgba(0,0,0,.1) 0 -1px 0 0',
-},
+  },
   submitButton: {
     height: '100%',
   },
@@ -69,7 +69,7 @@ const style: { [key: string]: CSSProperties } = {
   column: {
     flex: '1 1 25%',
     height: '100%',
-    boxShadow: 'rgba(0,0,0,.1) 0 0 8px 0 inset'
+    boxShadow: 'rgba(0,0,0,.1) 0 0 8px 0 inset',
   },
   columnHeading: {
     borderBottom: '1px solid rgba(0,0,0,0.1)',
@@ -79,8 +79,7 @@ const style: { [key: string]: CSSProperties } = {
 // because JSONTree styling is limited
 const classRoot = 'formik-';
 const stateContainerClass = `${classRoot}stateContainer`;
-const injectCss =
-  `.${stateContainerClass} > ul {
+const injectCss = `.${stateContainerClass} > ul {
     height: 100%;
     margin: 0;
   }`;
@@ -103,7 +102,7 @@ const eightiesTheme = {
   base0C: '#66cccc',
   base0D: '#6699cc',
   base0E: '#cc99cc',
-  base0F: '#d27b53'
+  base0F: '#d27b53',
 };
 
 type Values = any;
@@ -138,7 +137,7 @@ export const FormikPanel = () => {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: injectCss}} />
+      <style dangerouslySetInnerHTML={{ __html: injectCss }} />
       <div style={style.container}>
         <div style={style.header}>
           <button style={style.submitButton} onClick={() => emit(EVT_SUBMIT)}>
