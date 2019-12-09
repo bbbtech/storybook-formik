@@ -16,7 +16,8 @@ export const withFormik = makeDecorator({
     const channel = addons.getChannel();
     let submitter: () => void;
     channel.on(EVT_SUBMIT, () => submitter && submitter());
-    const formikConfig = parameters as ConfigWithoutSubmit;
+    const formikConfig = parameters as ConfigWithoutSubmit | undefined;
+    const initialValues = formikConfig && formikConfig.initialValues || {};
 
     return (
       <Formik
@@ -24,8 +25,8 @@ export const withFormik = makeDecorator({
           channel.emit(EVT_ON_SUBMIT, v);
           setSubmitting(false);
         }}
-        initialValues={formikConfig.initialValues || {}}
         {...formikConfig}
+        initialValues={initialValues}
       >
         {({
           values,
