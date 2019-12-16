@@ -65,6 +65,29 @@ within the storybook panel below.
 
 See [stories/example.stories.tsx](https://github.com/bhishp/storybook-formik/blob/master/stories/example.stories.tsx) for further examples
 
+### Using CSF
+
+This supports the CSF (Component Story Format) also, such as below:
+
+```js
+export const formik = () => (
+  <div>
+    <Field name="foo" />
+  </div>
+);
+
+formik.story = {
+  decorators: [withFormik],
+  parameters: {
+    formik: {
+      initialValues: {
+        foo: 'Initialized'
+      }
+    }
+  }
+};
+```
+
 ## Arguments
 
 You can pass any `Formik` component props (initialValues, validationSchema, validateOnBlur, etc) as arguments to a story.
