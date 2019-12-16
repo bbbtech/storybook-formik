@@ -4,6 +4,8 @@ A [Storybook](https://storybook.js.org/) Addon and Decorator to wrap Formik Fiel
 
 ![example screenshot](https://user-images.githubusercontent.com/12024258/70381969-9c13b400-194b-11ea-8444-582933bf30f5.png)
 
+You can see the example stories in action [here](https://bhishp.github.io/storybook-formik/).
+
 Thanks to [@jaredpalmer](https://jaredpalmer.com/) for giving us the amazing [formik](https://github.com/jaredpalmer/formik) library and making forms great again.
 
 ## Install

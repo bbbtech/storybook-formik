@@ -6,15 +6,18 @@
     "type": "git",
     "url": "https://github.com/bhishp/storybook-formik"
   },
+  "homepage": "https://bhishp.github.io/storybook-formik/",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
     "build": "tsc",
     "build:watch": "npm run build -- --watch",
-    "preversion": "npm run clean && npm run build",
+    "deploy": "npm run build-storybook && gh-pages -d build-sb",
+    "preversion": "npm run clean && npm run build && npm run deploy",
     "postversion": "git push && git push --tags && npm publish",
     "storybook": "start-storybook -p 6006",
+    "build-storybook": "rm -rf build-sb && build-storybook -o build-sb",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'"
   },
   "files": [
@@ -41,6 +44,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "formik": "^2.0.6",
+    "gh-pages": "^2.1.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
