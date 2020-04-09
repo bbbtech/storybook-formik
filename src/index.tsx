@@ -17,7 +17,7 @@ export const withFormik = makeDecorator({
     let submitter: () => void;
     channel.on(EVT_SUBMIT, () => submitter && submitter());
     const formikConfig = parameters as ConfigWithoutSubmit | undefined;
-    const initialValues = formikConfig && formikConfig.initialValues || {};
+    const initialValues = (formikConfig && formikConfig.initialValues) || {};
 
     return (
       <Formik
@@ -28,27 +28,11 @@ export const withFormik = makeDecorator({
         {...formikConfig}
         initialValues={initialValues}
       >
-        {({
-          values,
-          errors,
-          touched,
-          status,
-          isValidating,
-          isSubmitting,
-          submitCount,
-          submitForm,
-        }) => {
-          channel.emit(EVT_RENDER, {
-            values,
-            errors,
-            touched,
-            status,
-            isValidating,
-            isSubmitting,
-            submitCount,
-          });
+        {props => {
+          channel.emit(EVT_RENDER, props
+          );
           if (!submitter) {
-            submitter = submitForm;
+            submitter = props.submitForm;
           }
           return <Form>{getStory(context)}</Form>;
         }}
