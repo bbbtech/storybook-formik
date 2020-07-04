@@ -18,7 +18,7 @@
     "postversion": "git push && git push --tags && npm publish",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "rm -rf build-sb && build-storybook -o build-sb",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'"
+    "format": "prettier --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'"
   },
   "files": [
     "dist/**/*",
@@ -43,11 +43,13 @@
     "@types/yup": "^0.26.26",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "final-form": "^4.20.1",
     "formik": "^2.0.6",
     "gh-pages": "^2.1.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-final-form": "^6.5.0",
     "typescript": "^3.7.2",
     "yup": "^0.27.0"
   },

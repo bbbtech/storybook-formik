@@ -1,50 +1,12 @@
 import React, { CSSProperties, useState } from 'react';
 import { FormikState } from 'formik';
+import { FormState } from 'final-form';
 import JSONTree from 'react-json-tree';
 import { useChannel } from '@storybook/api';
 import { STORY_RENDERED } from '@storybook/core-events';
 
 import { EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
-
-const trafficLightStyle: CSSProperties = {
-  display: 'inline-block',
-  marginLeft: '4px',
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-};
-
-const booleanStateStyle: { [key: string]: CSSProperties } = {
-  wrapper: {
-    padding: '4px 16px',
-    border: '2px solid neon',
-  },
-  trafficLightTrue: {
-    ...trafficLightStyle,
-    backgroundColor: '#13bc86',
-  },
-  trafficLightFalse: {
-    ...trafficLightStyle,
-    backgroundColor: '#ff4d4d',
-  },
-};
-
-const BooleanState = ({ name, value }: { name: string; value?: boolean }) => (
-  <div style={booleanStateStyle.wrapper}>
-    {name}
-    <span
-      style={
-        value === undefined
-          ? {}
-          : value === true
-          ? booleanStateStyle.trafficLightTrue
-          : booleanStateStyle.trafficLightFalse
-      }
-    >
-      {value === undefined && '?'}
-    </span>
-  </div>
-);
+import { BooleanState } from './components/BooleanState';
 
 const style: { [key: string]: CSSProperties } = {
   container: {
@@ -108,7 +70,33 @@ const eightiesTheme = {
 
 type Values = any;
 
-export const FormikPanel = () => {
+const useFinalFormPanel = () => {
+  const [formState, setFormState] = useState<Partial<FormState<Values>>>({});
+  const [submitCount, setSubmitCount] = useState(0);
+
+  // TODO: Wrap in useEffect?
+  const emit = useChannel({
+    [EVT_RENDER]: async (state: FormState<Values>) => await setFormState(state),
+    // TODO: Two instances of channel listener, causing duplicate values to be set on state hook
+    [EVT_ON_SUBMIT]: async (values: Values) =>
+      await setSubmitCount(submitCount + 1),
+  });
+
+  const { values, errors, touched, validating, submitting } = formState;
+
+  return {
+    emit,
+    values,
+    errors,
+    touched,
+    // status,
+    isValidating: validating,
+    isSubmitting: submitting,
+    submitCount,
+  };
+};
+
+const useFormikPanel = () => {
   const [formikState, setFormikState] = useState<Partial<FormikState<Values>>>(
     {}
   );
@@ -132,6 +120,43 @@ export const FormikPanel = () => {
     isSubmitting,
     submitCount,
   } = formikState;
+
+  return {
+    emit,
+    values,
+    errors,
+    touched,
+    // status,
+    isValidating,
+    isSubmitting,
+    submitCount,
+  };
+};
+
+export const FormikPanel = () => {
+  // const {
+  //   emit,
+  //   values,
+  //   errors,
+  //   touched,
+  //   // status,
+  //   isValidating,
+  //   isSubmitting,
+  //   submitCount,
+  // } = useFormikPanel();
+
+  const {
+    emit,
+    values,
+    errors,
+    touched,
+    // status,
+    isValidating,
+    isSubmitting,
+    submitCount,
+  } = useFinalFormPanel();
+
+  // console.log(touched);
 
   return (
     <>

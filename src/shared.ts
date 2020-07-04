@@ -1,4 +1,5 @@
 import { FormikConfig } from 'formik';
+import { FormProps } from 'react-final-form';
 
 export const ADDON_ID = 'storybookjs/formik';
 export const PANEL_ID = `${ADDON_ID}/panel`;
@@ -14,6 +15,11 @@ export type ConfigWithoutSubmit<Values = any> = PartialBy<
   FormikConfig<Values>,
   'onSubmit'
 >;
+export type FinalFormPropsWithoutSubmit<Values = any> = PartialBy<
+  FormProps<Values>,
+  'onSubmit'
+>;
 export interface DecoratorParams<Values = any> {
-  formik: ConfigWithoutSubmit<Values>;
+  formik?: ConfigWithoutSubmit<Values>;
+  finalForm?: FinalFormPropsWithoutSubmit<Values>;
 }

@@ -1,45 +1,46 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
-import withFormik from '../dist';
 import {
-  PersonalInfoSubForm,
-  personalInfoInitialValues,
-  personalInfoValidationSchema,
   ProfessionalInfoSubForm,
   professionalInfoInitialValues,
   professionalInfoValidationSchema,
-  SignupForm,
+  PersonalInfoSubForm,
+  personalInfoInitialValues,
+  personalInfoValidationSchema,
+  feedbackInitialValues,
+  FeedbackSubform,
   MyCheckbox,
   MySelect,
   MyTextInput,
-  FeedbackSubform,
-  feedbackInitialValues,
-} from './example';
+  SignupForm,
+} from './final-form';
+import React from 'react';
 import { DecoratorParams } from '../src/shared';
+import { withFinalForm } from '../src';
+import { makeFinalFormValidator } from './lib';
 
-const personalInfoParams: DecoratorParams = {
-  formik: {
-    initialValues: personalInfoInitialValues,
-    validationSchema: personalInfoValidationSchema,
+const professionalInfoParams: DecoratorParams = {
+  finalForm: {
+    initialValues: professionalInfoInitialValues,
+    validate: makeFinalFormValidator(professionalInfoValidationSchema),
   },
 };
 
-const professionalInfoParams: DecoratorParams = {
-  formik: {
-    initialValues: professionalInfoInitialValues,
-    validationSchema: professionalInfoValidationSchema,
+const personalInfoParams: DecoratorParams = {
+  finalForm: {
+    initialValues: personalInfoInitialValues,
+    validate: makeFinalFormValidator(personalInfoValidationSchema),
   },
 };
 
 const feedbackParams: DecoratorParams = {
-  formik: {
+  finalForm: {
     initialValues: feedbackInitialValues,
-    validationSchema: personalInfoValidationSchema,
+    validate: makeFinalFormValidator(personalInfoValidationSchema),
   },
 };
 
-storiesOf('Example/subforms', module)
-  .addDecorator(withFormik)
+storiesOf('FinalForm/subforms', module)
+  .addDecorator(withFinalForm)
   .add(
     'PersonalInfoSubform',
     () => (
@@ -80,15 +81,15 @@ storiesOf('Example/subforms', module)
   );
 
 // You may want to demonstrate a library of your custom-made fields
-storiesOf('Example/MyFields', module)
-  .addDecorator(withFormik)
+storiesOf('FinalForm/MyFields', module)
+  .addDecorator(withFinalForm)
   .add(
     'MyCheckbox',
-    () => <MyCheckbox name="likeFormik">Do you like formik?</MyCheckbox>,
+    () => <MyCheckbox name="likeFinalForm">Do you like Final Form?</MyCheckbox>,
     {
-      formik: {
+      finalForm: {
         initialValues: {
-          likeFormik: true,
+          likeFinalForm: true,
         },
       },
     }
@@ -96,16 +97,16 @@ storiesOf('Example/MyFields', module)
   .add(
     'MySelect',
     () => (
-      <MySelect name="formikRating" label="How much do you like formik?">
+      <MySelect name="finalFormRating" label="How much do you like finalForm?">
         <option value="3">I like it</option>
         <option value="4">I really like it</option>
         <option value="5">I absolutely love it</option>
       </MySelect>
     ),
     {
-      formik: {
+      finalForm: {
         initialValues: {
-          formikRating: '5',
+          finalFormRating: '5',
         },
       },
     }
@@ -114,25 +115,25 @@ storiesOf('Example/MyFields', module)
     'MyTextInput',
     () => (
       <MyTextInput
-        name="formikTweet"
-        label="Describe formik in 80 characters"
-        placeholder="I love formik because..."
+        name="finalFormTweet"
+        label="Describe finalForm in 80 characters"
+        placeholder="I love finalForm because..."
       />
     ),
     {
-      formik: {
+      finalForm: {
         initialValues: {
-          formikTweet: '',
+          finalFormTweet: '',
         },
       },
     }
   );
 
-storiesOf('Example/standard', module).add('default', () => (
+storiesOf('FinalForm/standard', module).add('default', () => (
   <>
     <p>
       This is an entire 'Form'. It has several Fields that are descendants of an
-      overall Formik component. There is no need to supply a withFormik
+      overall Form component. There is no need to supply a withFinalForm
       decorator here
     </p>
     <SignupForm />
