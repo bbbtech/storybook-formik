@@ -59,11 +59,18 @@
     "react",
     "formik",
     "form",
-    "forms"
+    "forms",
+    "storybook-addon",
+    "code",
+    "popular"
   ],
   "author": "bhishp",
   "license": "MIT",
   "dependencies": {
     "react-json-tree": "^0.11.2"
+  },
+  "storybook": {
+    "icon": "https://pbs.twimg.com/profile_images/1148688127252471810/-UcA36Bw_400x400.png",
+    "displayName": "Formik"
   }
 }
