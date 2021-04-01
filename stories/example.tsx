@@ -4,24 +4,42 @@ import * as Yup from 'yup';
 
 // example adapted from official Formik docs: https://jaredpalmer.com/formik/docs/tutorial#leveraging-react-context
 
-export const personalInfoInitialValues = {
+export interface PersonalInfo {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+}
+
+export const personalInfoInitialValues: PersonalInfo = {
   firstName: 'Initial',
   lastName: '',
   email: '',
 };
 
-export const professionalInfoInitialValues = {
+export interface ProfessionalInfo {
+  jobType?: string;
+  acceptedTerms?: boolean;
+}
+
+export const professionalInfoInitialValues: ProfessionalInfo = {
   jobType: '',
   acceptedTerms: false,
 };
 
-export const feedbackInitialValues = {
+export interface Feedback extends PersonalInfo, ProfessionalInfo {
+  rating?: number;
+  remarks?: string;
+}
+
+export const feedbackInitialValues: Feedback = {
   ...personalInfoInitialValues,
   rating: 1,
   remarks: ''
 };
 
-const initialValues = {
+export type SignupInfo = PersonalInfo & ProfessionalInfo;
+
+const initialValues: SignupInfo = {
   ...personalInfoInitialValues,
   ...professionalInfoInitialValues
 };
@@ -175,7 +193,7 @@ export const SignupForm = () => {
   return (
     <>
       <h1>Subscribe!</h1>
-      <Formik
+      <Formik<SignupInfo>
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
