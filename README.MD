@@ -18,12 +18,8 @@ Then register the addon in `.storybook/main.js`
 
 ```ts
 module.exports = {
-  stories: [
-    '../stories/**/*.stories.tsx',
-  ],
-  addons: [
-    'storybook-formik/register',
-  ],
+  stories: ['../stories/**/*.stories.tsx'],
+  addons: ['storybook-formik/register'],
 };
 ```
 
@@ -55,8 +51,9 @@ You add the `withFormik` decorator to your stories and can pass any `Formik` pro
 export const personalInfoSubform = () => (
   <>
     <p>
-      The decorator can wrap Components that include Fields (or anything else expecting Formik context).
-      This allows us to better componentise our larger forms.
+      The decorator can wrap Components that include Fields (or anything else
+      expecting Formik context). This allows us to better componentise our
+      larger forms.
     </p>
     <PersonalInfoSubForm />
   </>
@@ -67,7 +64,7 @@ const personalInfoParams: DecoratorParams<PersonalInfo> = {
   formik: {
     initialValues: personalInfoInitialValues,
     validationSchema: personalInfoValidationSchema,
-  }
+  },
 };
 personalInfoSubform.parameters = personalInfoParams;
 ```
@@ -108,7 +105,11 @@ If no initial values are supplied, `{}` will be used.
 
 ```tsx
 export const myTextInput = () => (
-  <MyTextInput name="formikTweet" label="Describe formik in 80 characters" placeholder="I love formik because..." />
+  <MyTextInput
+    name="formikTweet"
+    label="Describe formik in 80 characters"
+    placeholder="I love formik because..."
+  />
 );
 myTextInput.parameters = {
   formik: {
@@ -116,12 +117,12 @@ myTextInput.parameters = {
       formikTweet: '',
     },
     validationSchema: someSchema,
-    onSubmit: (v) => console.log('I want to log these... ', v),
-  }
+    onSubmit: v => console.log('I want to log these... ', v),
+  },
 };
 ```
 
 ## Mature Examples
 
 In time, I will add more mature examples that show the usefulness of the subforms pattern on a larger scale. If anyone
-has any good examples then please do submit them. 
+has any good examples then please do submit them.
