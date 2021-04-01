@@ -10,14 +10,21 @@ Thanks to [@jaredpalmer](https://jaredpalmer.com/) for giving us the amazing [fo
 
 ## Install
 
-```js
+```sh
 npm install --save-dev storybook-formik
 ```
 
-Then register the addon in `.storybook/addons.js`
+Then register the addon in `.storybook/main.js`
 
-```js
-import 'storybook-formik/register';
+```ts
+module.exports = {
+  stories: [
+    '../stories/**/*.stories.tsx',
+  ],
+  addons: [
+    'storybook-formik/register',
+  ],
+};
 ```
 
 ## Usage
@@ -28,7 +35,7 @@ decorator so that we can wrap the subform in a Formik component, which will pass
 
 Given a simple subform:
 
-```js
+```tsx
 import React from 'react';
 import { Field } from 'formik';
 
@@ -44,7 +51,37 @@ export default PersonalInfoSubform;
 
 You add the `withFormik` decorator to your stories and can pass any `Formik` props as a parameter to the individual story.
 
-```js
+```tsx
+export const personalInfoSubform = () => (
+  <>
+    <p>
+      The decorator can wrap Components that include Fields (or anything else expecting Formik context).
+      This allows us to better componentise our larger forms.
+    </p>
+    <PersonalInfoSubForm />
+  </>
+);
+personalInfoSubform.decorators = [withFormik];
+// can use the DecoratorParams type and pass a type for type-safety of initialValues
+const personalInfoParams: DecoratorParams<PersonalInfo> = {
+  formik: {
+    initialValues: personalInfoInitialValues,
+    validationSchema: personalInfoValidationSchema,
+  }
+};
+personalInfoSubform.parameters = personalInfoParams;
+```
+
+This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
+within the storybook panel below.
+
+See the [example stories](https://github.com/bhishp/storybook-formik/blob/master/stories/) for further examples
+
+### Legacy story format
+
+Example with the `storiesOf` syntax.
+
+```tsx
 import { storiesOf } from '@storybook/react';
 import withFormik from 'storybook-formik';
 
@@ -62,34 +99,6 @@ storiesOf('Example', module)
   });
 ```
 
-This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
-within the storybook panel below.
-
-See [stories/example.stories.tsx](https://github.com/bhishp/storybook-formik/blob/master/stories/example.stories.tsx) for further examples
-
-### Using CSF
-
-This supports the CSF (Component Story Format) also, such as below:
-
-```js
-export const formik = () => (
-  <div>
-    <Field name="foo" />
-  </div>
-);
-
-formik.story = {
-  decorators: [withFormik],
-  parameters: {
-    formik: {
-      initialValues: {
-        foo: 'Initialized'
-      }
-    }
-  }
-};
-```
-
 ## Arguments
 
 You can pass any `Formik` component props (initialValues, validationSchema, validateOnBlur, etc) as arguments to a story.
@@ -97,16 +106,22 @@ These props must be passed under the `formik` parameter key.
 
 If no initial values are supplied, `{}` will be used.
 
-```js
-.add('MyTextInput', () => (
-    <MyTextInput name="formikTweet" label="Describe formik in 80 characters" placeholder="I love formik because..." />
-  ), {
-    formik: {
-      initialValues: {
-        formikTweet: '',
-      },
-      validationSchema: someSchema,
-      onSubmit: (v) => console.log('I want to log these... ', v),
-    }
-  });
+```tsx
+export const myTextInput = () => (
+  <MyTextInput name="formikTweet" label="Describe formik in 80 characters" placeholder="I love formik because..." />
+);
+myTextInput.parameters = {
+  formik: {
+    initialValues: {
+      formikTweet: '',
+    },
+    validationSchema: someSchema,
+    onSubmit: (v) => console.log('I want to log these... ', v),
+  }
+};
 ```
+
+## Mature Examples
+
+In time, I will add more mature examples that show the usefulness of the subforms pattern on a larger scale. If anyone
+has any good examples then please do submit them. 
