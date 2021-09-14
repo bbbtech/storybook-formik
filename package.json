@@ -40,7 +40,6 @@
     "@types/node": "^12.12.14",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
-    "@types/react-json-tree": "^0.6.11",
     "@types/react-syntax-highlighter": "^13.5.0",
     "@types/yup": "^0.26.26",
     "awesome-typescript-loader": "^5.2.1",
@@ -67,7 +66,7 @@
   "author": "bhishp",
   "license": "MIT",
   "dependencies": {
-    "react-json-tree": "^0.11.2"
+    "react-json-tree": "^0.15.0"
   },
   "storybook": {
     "icon": "https://pbs.twimg.com/profile_images/1148688127252471810/-UcA36Bw_400x400.png",
