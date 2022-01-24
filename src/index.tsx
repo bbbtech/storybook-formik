@@ -8,6 +8,8 @@ import {
   EVT_SUBMIT,
 } from './shared';
 
+export { DecoratorParams } from './shared';
+
 export const withFormik = makeDecorator({
   name: 'withFormik',
   parameterName: 'formik',
