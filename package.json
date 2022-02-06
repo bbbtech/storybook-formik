@@ -1,6 +1,6 @@
 {
   "name": "storybook-formik",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A storybook addon that allows you to use components in your stories that rely on Formik context and see internal Formik state in a panel.",
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "chromatic": "npx chromatic --project-token 81997269ab40"
   },
-  "files": ["dist/**/*", "register.js"],
+  "files": [
+    "dist/**/*",
+    "register.js"
+  ],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",
