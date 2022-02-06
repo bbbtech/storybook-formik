@@ -19,7 +19,7 @@ Then register the addon in `.storybook/main.js`
 ```ts
 module.exports = {
   stories: ['../stories/**/*.stories.tsx'],
-  addons: ['storybook-formik/register'],
+  addons: ['storybook-formik/register']
 };
 ```
 
@@ -63,8 +63,8 @@ personalInfoSubform.decorators = [withFormik];
 const personalInfoParams: DecoratorParams<PersonalInfo> = {
   formik: {
     initialValues: personalInfoInitialValues,
-    validationSchema: personalInfoValidationSchema,
-  },
+    validationSchema: personalInfoValidationSchema
+  }
 };
 personalInfoSubform.parameters = personalInfoParams;
 ```
@@ -90,9 +90,9 @@ storiesOf('Example', module)
     formik: {
       initialValues: {
         forename: 'John',
-        surname: 'Johnerson',
-      },
-    },
+        surname: 'Johnerson'
+      }
+    }
   });
 ```
 
@@ -114,11 +114,11 @@ export const myTextInput = () => (
 myTextInput.parameters = {
   formik: {
     initialValues: {
-      formikTweet: '',
+      formikTweet: ''
     },
     validationSchema: someSchema,
-    onSubmit: v => console.log('I want to log these... ', v),
-  },
+    onSubmit: v => console.log('I want to log these... ', v)
+  }
 };
 ```
 

@@ -14,6 +14,6 @@ addons.register(ADDON_ID, () => {
         <FormikPanel />
       </AddonPanel>
     ),
-    paramKey: PARAM_KEY,
+    paramKey: PARAM_KEY
   });
 });

@@ -9,20 +9,24 @@ import {
   professionalInfoInitialValues,
   professionalInfoValidationSchema,
   FeedbackSubform,
-  feedbackInitialValues, PersonalInfo, ProfessionalInfo, Feedback,
+  feedbackInitialValues,
+  PersonalInfo,
+  ProfessionalInfo,
+  Feedback
 } from './example';
 import { DecoratorParams } from '../src/shared';
 
 const meta: Meta = {
   title: 'WithFormik/Subforms'
-}
+};
 export default meta;
 
 export const personalInfoSubform = () => (
   <>
     <p>
-      The decorator can wrap Components that include Fields (or anything else expecting Formik context).
-      This allows us to better componentise our larger forms.
+      The decorator can wrap Components that include Fields (or anything else
+      expecting Formik context). This allows us to better componentise our
+      larger forms.
     </p>
     <PersonalInfoSubForm />
   </>
@@ -31,23 +35,21 @@ personalInfoSubform.decorators = [withFormik];
 const personalInfoParams: DecoratorParams<PersonalInfo> = {
   formik: {
     initialValues: personalInfoInitialValues,
-    validationSchema: personalInfoValidationSchema,
+    validationSchema: personalInfoValidationSchema
   }
 };
 personalInfoSubform.parameters = personalInfoParams;
 
 export const professionalInfoSubform = () => (
   <>
-    <p>
-      Here we can play with the Professional Info subform as standalone
-    </p>
+    <p>Here we can play with the Professional Info subform as standalone</p>
     <ProfessionalInfoSubForm />
   </>
 );
 const professionalInfoParams: DecoratorParams<ProfessionalInfo> = {
   formik: {
     initialValues: professionalInfoInitialValues,
-    validationSchema: professionalInfoValidationSchema,
+    validationSchema: professionalInfoValidationSchema
   }
 };
 professionalInfoSubform.story = {
@@ -58,8 +60,9 @@ professionalInfoSubform.story = {
 export const feedbackSubform = () => (
   <>
     <p>
-      With better tooling it makes it easier for us to componentise and compose our subforms.
-      Here we re-use the above PersonalInfoSubform in our FeedbackSubform.
+      With better tooling it makes it easier for us to componentise and compose
+      our subforms. Here we re-use the above PersonalInfoSubform in our
+      FeedbackSubform.
     </p>
     <FeedbackSubform />
   </>
@@ -67,7 +70,7 @@ export const feedbackSubform = () => (
 const feedbackParams: DecoratorParams<Feedback> = {
   formik: {
     initialValues: feedbackInitialValues,
-    validationSchema: personalInfoValidationSchema,
+    validationSchema: personalInfoValidationSchema
   }
 };
 feedbackSubform.story = {
