@@ -101,7 +101,7 @@ storiesOf('Example', module)
 You can pass any `Formik` component props (initialValues, validationSchema, validateOnBlur, etc) as arguments to a story.
 These props must be passed under the `formik` parameter key.
 
-If no initial values are supplied, `{}` will be used.
+If no initial values are supplied, `{ enableReinitialize: true, initialValues: StoryContext.args || {} }` will be used.
 
 ```tsx
 export const myTextInput = () => (
@@ -121,6 +121,10 @@ myTextInput.parameters = {
   },
 };
 ```
+
+### `formik.castArgs` and `formik.validationSchema`
+
+If a `validationSchema` is provided in the `formik` config and `castArgs: true`, then `validationSchema.cast(initialValues || StoryContext.args || {})` will be called and the result passed in as `initialValues`.
 
 ## Mature Examples
 
