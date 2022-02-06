@@ -21,10 +21,7 @@
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "chromatic": "npx chromatic --project-token 81997269ab40"
   },
-  "files": [
-    "dist/**/*",
-    "register.js"
-  ],
+  "files": ["dist/**/*", "register.js"],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",

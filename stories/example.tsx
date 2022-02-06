@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react';
+import React, { CSSProperties } from 'react';
 import { Formik, Form, useField, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,7 +13,7 @@ export interface PersonalInfo {
 export const personalInfoInitialValues: PersonalInfo = {
   firstName: 'Initial',
   lastName: '',
-  email: '',
+  email: ''
 };
 
 export interface ProfessionalInfo {
@@ -23,7 +23,7 @@ export interface ProfessionalInfo {
 
 export const professionalInfoInitialValues: ProfessionalInfo = {
   jobType: '',
-  acceptedTerms: false,
+  acceptedTerms: false
 };
 
 export interface Feedback extends PersonalInfo, ProfessionalInfo {
@@ -53,22 +53,21 @@ export const personalInfoValidationSchema = Yup.object({
     .required('Required'),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Required'),
+    .required('Required')
 });
 
 export const professionalInfoValidationSchema = Yup.object({
   jobType: Yup.string()
-    .oneOf(
-      ['designer', 'development', 'product', 'other'],
-      'Invalid Job Type'
-    )
+    .oneOf(['designer', 'development', 'product', 'other'], 'Invalid Job Type')
     .required('Required'),
   acceptedTerms: Yup.boolean()
     .required('Required')
-    .oneOf([true], 'You must accept the terms and conditions.'),
+    .oneOf([true], 'You must accept the terms and conditions.')
 });
 
-const validationSchema = Yup.object().concat(personalInfoValidationSchema).concat(professionalInfoValidationSchema);
+const validationSchema = Yup.object()
+  .concat(personalInfoValidationSchema)
+  .concat(professionalInfoValidationSchema);
 
 const onSubmit = (values: any, { setSubmitting }: any) => {
   setTimeout(() => {
@@ -80,14 +79,14 @@ const onSubmit = (values: any, { setSubmitting }: any) => {
 const style: { [key: string]: CSSProperties } = {
   label: {
     display: 'block',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   field: {
     display: 'block'
   },
   error: {
     display: 'block',
-    color: '#ff4d4d',
+    color: '#ff4d4d'
   }
 };
 
@@ -98,7 +97,7 @@ export const MyCheckbox = ({ children, ...props }: any) => {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
   return (
     <>
-      <label style={style.label} >
+      <label style={style.label}>
         <input type="checkbox" {...field} {...props} />
         {children}
       </label>
@@ -113,7 +112,9 @@ export const MySelect = (props: any) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label style={style.label} htmlFor={props.id || props.name}>{props.label}</label>
+      <label style={style.label} htmlFor={props.id || props.name}>
+        {props.label}
+      </label>
       <select style={style.field} {...field} {...props} />
       {meta.touched && meta.error ? (
         <div style={style.error}>{meta.error}</div>
@@ -128,7 +129,9 @@ export const MyTextInput = (props: any) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label style={style.label} htmlFor={props.id || props.name}>{props.label}</label>
+      <label style={style.label} htmlFor={props.id || props.name}>
+        {props.label}
+      </label>
       <input style={style.field} {...field} {...props} />
       {meta.touched && meta.error ? (
         <div style={style.error}>{meta.error}</div>
@@ -178,13 +181,17 @@ export const PersonalInfoSubForm = () => (
 export const FeedbackSubform = () => (
   <>
     <PersonalInfoSubForm />
-    <label style={style.label} htmlFor="rating">How good?</label>
+    <label style={style.label} htmlFor="rating">
+      How good?
+    </label>
     <Field style={style.field} component="select" name="rating">
       <option value={0}>Bad</option>
       <option value={1}>Neutral</option>
       <option value={2}>Good</option>
     </Field>
-    <label style={style.label} htmlFor="remarks">Why so good?</label>
+    <label style={style.label} htmlFor="remarks">
+      Why so good?
+    </label>
     <Field style={style.field} component="textarea" name="remarks" />
   </>
 );

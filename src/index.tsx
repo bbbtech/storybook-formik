@@ -5,7 +5,7 @@ import {
   ConfigWithoutSubmit,
   EVT_ON_SUBMIT,
   EVT_RENDER,
-  EVT_SUBMIT,
+  EVT_SUBMIT
 } from './shared';
 
 export const withFormik = makeDecorator({
@@ -37,7 +37,7 @@ export const withFormik = makeDecorator({
         }}
       </Formik>
     );
-  },
+  }
 });
 
 export default withFormik;
