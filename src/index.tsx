@@ -34,7 +34,7 @@ export const withFormik = makeDecorator({
 
     return (
       <Formik
-      enableReinitialize
+        enableReinitialize
         onSubmit={(v, { setSubmitting }) => {
           channel.emit(EVT_ON_SUBMIT, v);
           setSubmitting(false);
