@@ -20,12 +20,11 @@ export const withFormik = makeDecorator({
     channel.on(EVT_SUBMIT, () => submitter && submitter());
     const formikConfig = parameters as ConfigWithoutExtra | undefined;
     let initialValues =
-      context.args || (formikConfig && formikConfig.initialValues) || {};
+      (formikConfig && formikConfig.initialValues) || context.args || {};
 
     if (
       context.args &&
       formikConfig &&
-      !formikConfig.initialValues &&
       formikConfig.validationSchema &&
       parameters.castArgs
     ) {
