@@ -2,11 +2,13 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import addons, { makeDecorator } from '@storybook/addons';
 import {
-  ConfigWithoutSubmit,
+  ConfigWithoutExtra,
   EVT_ON_SUBMIT,
   EVT_RENDER,
   EVT_SUBMIT,
 } from './shared';
+
+export { DecoratorParams } from './shared';
 
 export const withFormik = makeDecorator({
   name: 'withFormik',
@@ -16,11 +18,22 @@ export const withFormik = makeDecorator({
     const channel = addons.getChannel();
     let submitter: () => void;
     channel.on(EVT_SUBMIT, () => submitter && submitter());
-    const formikConfig = parameters as ConfigWithoutSubmit | undefined;
-    const initialValues = (formikConfig && formikConfig.initialValues) || {};
+    const formikConfig = parameters as ConfigWithoutExtra | undefined;
+    let initialValues =
+      (formikConfig && formikConfig.initialValues) || context.args || {};
+
+    if (
+      context.args &&
+      formikConfig &&
+      formikConfig.validationSchema &&
+      parameters.castArgs
+    ) {
+      initialValues = formikConfig.validationSchema.cast(initialValues);
+    }
 
     return (
       <Formik
+        enableReinitialize
         onSubmit={(v, { setSubmitting }) => {
           channel.emit(EVT_ON_SUBMIT, v);
           setSubmitting(false);
