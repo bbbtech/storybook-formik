@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
-import addons, { makeDecorator } from '@storybook/addons';
+import addons, { makeDecorator, useArgs } from '@storybook/addons';
 import {
   ConfigWithoutExtra,
   EVT_ON_SUBMIT,
@@ -19,18 +19,19 @@ export const withFormik = makeDecorator({
     let submitter: () => void;
     channel.on(EVT_SUBMIT, () => submitter && submitter());
     const formikConfig = parameters as ConfigWithoutExtra | undefined;
+    const hasArgs = Object.keys(context.argTypes).length > 0;
     let initialValues =
       (formikConfig && formikConfig.initialValues) || context.args || {};
 
     if (
-      context.args &&
       formikConfig &&
       formikConfig.validationSchema &&
-      parameters.castArgs
+      parameters.castValues
     ) {
       initialValues = formikConfig.validationSchema.cast(initialValues);
     }
 
+    const [_, updateArgs] = useArgs();
     return (
       <Formik
         enableReinitialize
@@ -41,11 +42,20 @@ export const withFormik = makeDecorator({
         {...formikConfig}
         initialValues={initialValues}
       >
-        {props => {
+        {function FormWrap(props) {
           channel.emit(EVT_RENDER, props);
           if (!submitter) {
             submitter = props.submitForm;
           }
+
+          useEffect(() => {
+            if (!hasArgs) {
+              return;
+            }
+
+            updateArgs(props.values);
+          }, [hasArgs, props.values]);
+
           return <Form>{getStory(context)}</Form>;
         }}
       </Formik>
