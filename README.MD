@@ -122,9 +122,34 @@ myTextInput.parameters = {
 };
 ```
 
-### `formik.castArgs` and `formik.validationSchema`
+### `formik.castValues` with `formik.validationSchema`
 
-If a `validationSchema` is provided in the `formik` config and `castArgs: true`, then `validationSchema.cast(initialValues || StoryContext.args || {})` will be called and the result passed in as `initialValues`.
+If a `validationSchema` is provided in the `formik` config and `{ castValues: true }`, then `validationSchema.cast(initialValues || StoryContext.args || {})` will be called and the result passed in as `initialValues`.
+
+This is useful if the form fields require a certain format to their values or when automatically converting `StoryContext.args` into a valid set of `initialValues`.
+
+## Using with Controls
+
+If using `@storybook/addon-essentials` and `StoryContext.args`, `withFormik` will syncronize the form values with the storybook controls.
+
+```tsx
+export const myTextInput = () => (
+  <MyTextInput
+    name="formikTweet"
+    label="Describe formik in 80 characters"
+    placeholder="I love formik because..."
+  />
+);
+myTextInput.args = {
+  formikTweet: ''
+};
+myTextInput.parameters = {
+  formik: {
+    validationSchema: someSchema,
+    onSubmit: v => console.log('I want to log these... ', v)
+  }
+};
+```
 
 ## Mature Examples
 
