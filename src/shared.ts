@@ -11,8 +11,11 @@ export const EVT_ON_SUBMIT = 'formik/on-submit';
 
 type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type ConfigWithoutExtra<Values = any> = PartialBy<
-  Omit<FormikConfig<Values>, 'initialValues'> & { castArgs?: boolean, initialValues?: Values },
-  'onSubmit' | 'castArgs'
+  Omit<FormikConfig<Values>, 'initialValues'> & {
+    castValues?: boolean;
+    initialValues?: Values;
+  },
+  'onSubmit' | 'castValues'
 >;
 export interface DecoratorParams<Values = any> {
   formik: ConfigWithoutExtra<Values>;
