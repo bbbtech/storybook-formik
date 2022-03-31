@@ -7,12 +7,16 @@
     "url": "https://github.com/bhishp/storybook-formik"
   },
   "homepage": "https://bhishp.github.io/storybook-formik/",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/types/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc",
+    "build": "npm run build:esm && npm run build:cjs",
     "build:watch": "npm run build -- --watch",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "prepack": "npm run build",
     "deploy": "npm run build-storybook && gh-pages -d build-sb",
     "preversion": "npm run clean && npm run build && npm run deploy",
     "postversion": "git push && git push --tags && npm publish",
@@ -21,10 +25,7 @@
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "chromatic": "npx chromatic --project-token 81997269ab40"
   },
-  "files": [
-    "dist/**/*",
-    "register.js"
-  ],
+  "files": ["dist/**/*", "register.js"],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",

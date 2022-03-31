@@ -3,6 +3,6 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '../dist/register',
-  ],
+    '../preset.js'
+  ]
 };
