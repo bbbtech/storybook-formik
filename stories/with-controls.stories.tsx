@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { ComponentStory } from '@storybook/react';
 import React, { FC } from 'react';
-import withFormik from '../dist';
+import withFormik from '../dist/esm';
 import {
   PersonalInfo,
   personalInfoInitialValues,

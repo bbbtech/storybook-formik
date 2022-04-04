@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import withFormik from '../dist';
+import withFormik from '../dist/esm';
 import { MyCheckbox, MySelect, MyTextInput } from './example';
 
 const meta: Meta = {
