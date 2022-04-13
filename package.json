@@ -26,7 +26,10 @@
     "chromatic": "npx chromatic --project-token 81997269ab40",
     "test": "jest"
   },
-  "files": ["dist/**/*", "register.js"],
+  "files": [
+    "dist/**/*",
+    "register.js"
+  ],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",
@@ -63,7 +66,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "typescript": "^4.2.3",
-    "yup": "^0.27.0"
+    "yup": "^0.32.11"
   },
   "keywords": [
     "storybook",
