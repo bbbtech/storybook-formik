@@ -6,9 +6,9 @@ import * as stories from './fields.stories';
 
 const { myTextInput: MyTextInput } = composeStories(stories);
 
-// And it also works for testing your components with @storybook/testing-react
 describe('subforms', () => {
-  test('works works', () => {
+  // Stories are reused and the tests become simpler thanks to https://github.com/storybookjs/testing-react
+  test('renders correctly from the story using Formik decorator', () => {
     render(<MyTextInput />);
     expect(
       screen.getByText('Describe formik in 80 characters')
