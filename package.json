@@ -1,6 +1,6 @@
 {
   "name": "storybook-formik",
-  "version": "2.3.1",
+  "version": "2.3.2-0",
   "description": "A storybook addon that allows you to use components in your stories that rely on Formik context and see internal Formik state in a panel.",
   "repository": {
     "type": "git",
