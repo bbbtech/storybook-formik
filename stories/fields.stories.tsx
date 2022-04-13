@@ -1,6 +1,6 @@
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import withFormik from '../dist';
+import withFormik from '../dist/esm';
 import { MyCheckbox, MySelect, MyTextInput } from './example';
 
 const meta: Meta = {
@@ -11,7 +11,7 @@ export default meta;
 
 // You may want to demonstrate a library of your custom-made fields
 
-export const myCheckbox = () => (
+export const myCheckbox: Story = () => (
   <MyCheckbox name="likeFormik">Do you like formik?</MyCheckbox>
 );
 myCheckbox.parameters = {
@@ -22,7 +22,7 @@ myCheckbox.parameters = {
   }
 };
 
-export const mySelect = () => (
+export const mySelect: Story = () => (
   <MySelect name="formikRating" label="How much do you like formik?">
     <option value="3">I like it</option>
     <option value="4">I really like it</option>
@@ -37,7 +37,7 @@ mySelect.parameters = {
   }
 };
 
-export const myTextInput = () => (
+export const myTextInput: Story = () => (
   <MyTextInput
     name="formikTweet"
     label="Describe formik in 80 characters"

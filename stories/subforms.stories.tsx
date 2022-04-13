@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import withFormik from '../dist';
+import withFormik from '../dist/esm';
 import {
   PersonalInfoSubForm,
   personalInfoInitialValues,
