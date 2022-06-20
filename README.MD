@@ -155,3 +155,15 @@ myTextInput.parameters = {
 
 In time, I will add more mature examples that show the usefulness of the subforms pattern on a larger scale. If anyone
 has any good examples then please do submit them.
+
+## Development
+
+You can test changes by building the package locally. The flow would be something like this:
+
+- Make changes to addon
+- `npm run build:watch` - builds the dist bundle locally in watch mode
+- `npm run storybook` - runs the package storybook with the example forms, preview changes here
+- `npm run test` - run unit tests
+
+Deployment is pretty basic/simple right now, all you need to do is: `npm version`, and specify a new version, this will
+kick off relevant lifecycle scripts defined in the package.json (including `npm publish` in the `postversion` script)
