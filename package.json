@@ -23,7 +23,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "rm -rf build-sb && build-storybook -o build-sb",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
-    "chromatic": "npx chromatic --project-token 81997269ab40",
     "test": "jest"
   },
   "files": [
@@ -57,7 +56,6 @@
     "@types/yup": "^0.26.26",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "chromatic": "^5.6.3",
     "concurrently": "^7.1.0",
     "formik": "^2.0.6",
     "gh-pages": "^2.1.1",
