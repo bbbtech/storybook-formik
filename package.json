@@ -1,12 +1,12 @@
 {
-  "name": "storybook-formik",
+  "name": "@bbbtech/storybook-formik",
   "version": "2.4.1",
   "description": "A storybook addon that allows you to use components in your stories that rely on Formik context and see internal Formik state in a panel.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bhishp/storybook-formik"
+    "url": "https://github.com/bbbtech/storybook-formik"
   },
-  "homepage": "https://bhishp.github.io/storybook-formik/",
+  "homepage": "https://bbbtech.github.io/storybook-formik/",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "dist/types/index.d.ts",
@@ -24,6 +24,9 @@
     "build-storybook": "rm -rf build-sb && build-storybook -o build-sb",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "test": "jest"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "dist/**/*",
