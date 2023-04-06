@@ -28,7 +28,7 @@ Then register the addon in `.storybook/main.js`
 ```ts
 module.exports = {
   stories: ['../stories/**/*.stories.tsx'],
-  addons: ['@bbbtech/storybook-formik/register']
+  addons: ['@bbbtech/storybook-formik/register'],
 };
 ```
 
@@ -72,8 +72,8 @@ personalInfoSubform.decorators = [withFormik];
 const personalInfoParams: DecoratorParams<PersonalInfo> = {
   formik: {
     initialValues: personalInfoInitialValues,
-    validationSchema: personalInfoValidationSchema
-  }
+    validationSchema: personalInfoValidationSchema,
+  },
 };
 personalInfoSubform.parameters = personalInfoParams;
 ```
@@ -81,7 +81,7 @@ personalInfoSubform.parameters = personalInfoParams;
 This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
 within the storybook panel below.
 
-See the [example stories](https://github.com/bbbtech/storybook-formik/blob/master/stories/) for further examples
+See the [example stories](https://github.com/bbbtech/storybook-formik/blob/main/stories/) for further examples
 
 ### Legacy story format
 
@@ -99,9 +99,9 @@ storiesOf('Example', module)
     formik: {
       initialValues: {
         forename: 'John',
-        surname: 'Johnerson'
-      }
-    }
+        surname: 'Johnerson',
+      },
+    },
   });
 ```
 
@@ -123,11 +123,11 @@ export const myTextInput = () => (
 myTextInput.parameters = {
   formik: {
     initialValues: {
-      formikTweet: ''
+      formikTweet: '',
     },
     validationSchema: someSchema,
-    onSubmit: v => console.log('I want to log these... ', v)
-  }
+    onSubmit: v => console.log('I want to log these... ', v),
+  },
 };
 ```
 
@@ -150,13 +150,13 @@ export const myTextInput = () => (
   />
 );
 myTextInput.args = {
-  formikTweet: ''
+  formikTweet: '',
 };
 myTextInput.parameters = {
   formik: {
     validationSchema: someSchema,
-    onSubmit: v => console.log('I want to log these... ', v)
-  }
+    onSubmit: v => console.log('I want to log these... ', v),
+  },
 };
 ```
 
@@ -165,7 +165,9 @@ myTextInput.parameters = {
 In time, I will add more mature examples that show the usefulness of the subforms pattern on a larger scale. If anyone
 has any good examples then please do submit them.
 
-## Development
+## Contributing
+
+### Development
 
 You can test changes by building the package locally. The flow would be something like this:
 
@@ -173,6 +175,8 @@ You can test changes by building the package locally. The flow would be somethin
 - `npm run build:watch` - builds the dist bundle locally in watch mode
 - `npm run storybook` - runs the package storybook with the example forms, preview changes here
 - `npm run test` - run unit tests
+
+### Releasing a new version
 
 Deployment is pretty basic/simple right now, all you need to do is: `npm version`, and specify a new version, this will
 kick off relevant lifecycle scripts defined in the package.json (including `npm publish` in the `postversion` script)

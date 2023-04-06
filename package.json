@@ -22,7 +22,8 @@
     "postversion": "git push && git push --tags && npm publish",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "rm -rf build-sb && storybook build -o build-sb",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
+    "format": "prettier --write  --trailing-comma es5 --single-quote 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
+    "format:check": "prettier --check --trailing-comma es5 --single-quote 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "test": "jest"
   },
   "publishConfig": {
