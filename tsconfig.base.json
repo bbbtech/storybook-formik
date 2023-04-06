@@ -10,7 +10,8 @@
     "declarationDir": "./dist/types",
     "noImplicitAny": true,
     "rootDir": "src",
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
