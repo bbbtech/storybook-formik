@@ -81,7 +81,7 @@ personalInfoSubform.parameters = personalInfoParams;
 This gives you the benefit of rendering formik Fields that are expecting formik context, but also to track the key formik state
 within the storybook panel below.
 
-See the [example stories](https://github.com/bbbtech/storybook-formik/blob/master/stories/) for further examples
+See the [example stories](https://github.com/bbbtech/storybook-formik/blob/main/stories/) for further examples
 
 ### Legacy story format
 
