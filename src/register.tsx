@@ -1,5 +1,5 @@
 import React from 'react';
-import addons, { types } from '@storybook/addons';
+import { types, addons } from '@storybook/addons';
 import { AddonPanel } from '@storybook/components';
 
 import { ADDON_ID, PANEL_ID, PARAM_KEY } from './shared';
