@@ -5,7 +5,7 @@ import {
   ConfigWithoutExtra,
   EVT_ON_SUBMIT,
   EVT_RENDER,
-  EVT_SUBMIT
+  EVT_SUBMIT,
 } from './shared';
 
 export { DecoratorParams } from './shared';
@@ -60,7 +60,7 @@ export const withFormik = makeDecorator({
         }}
       </Formik>
     );
-  }
+  },
 });
 
 export default withFormik;
