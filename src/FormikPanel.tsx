@@ -1,6 +1,6 @@
 import React, { CSSProperties, useState } from 'react';
 import { FormikState } from 'formik';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { useChannel } from '@storybook/api';
 import { STORY_RENDERED } from '@storybook/core-events';
 
@@ -11,22 +11,22 @@ const trafficLightStyle: CSSProperties = {
   marginLeft: '4px',
   width: '10px',
   height: '10px',
-  borderRadius: '50%',
+  borderRadius: '50%'
 };
 
 const booleanStateStyle: { [key: string]: CSSProperties } = {
   wrapper: {
     padding: '4px 16px',
-    border: '2px solid neon',
+    border: '2px solid neon'
   },
   trafficLightTrue: {
     ...trafficLightStyle,
-    backgroundColor: '#13bc86',
+    backgroundColor: '#13bc86'
   },
   trafficLightFalse: {
     ...trafficLightStyle,
-    backgroundColor: '#ff4d4d',
-  },
+    backgroundColor: '#ff4d4d'
+  }
 };
 
 const BooleanState = ({ name, value }: { name: string; value?: boolean }) => (
@@ -49,30 +49,30 @@ const BooleanState = ({ name, value }: { name: string; value?: boolean }) => (
 const style: { [key: string]: CSSProperties } = {
   container: {
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     height: '32px',
     alignItems: 'center',
-    boxShadow: 'rgba(0,0,0,.1) 0 -1px 0 0',
+    boxShadow: 'rgba(0,0,0,.1) 0 -1px 0 0'
   },
   submitButton: {
-    height: '100%',
+    height: '100%'
   },
   columns: {
     display: 'flex',
-    height: '100%',
+    height: '100%'
   },
   column: {
     flex: '1 1 25%',
     height: '100%',
-    boxShadow: 'rgba(0,0,0,.1) 0 0 8px 0 inset',
+    boxShadow: 'rgba(0,0,0,.1) 0 0 8px 0 inset'
   },
   columnHeading: {
-    borderBottom: '1px solid rgba(0,0,0,0.1)',
-  },
+    borderBottom: '1px solid rgba(0,0,0,0.1)'
+  }
 };
 
 // because JSONTree styling is limited
@@ -102,7 +102,7 @@ const eightiesTheme = {
   base0C: '#66cccc',
   base0D: '#6699cc',
   base0E: '#cc99cc',
-  base0F: '#d27b53',
+  base0F: '#d27b53'
 };
 
 type Values = any;
@@ -119,7 +119,7 @@ export const FormikPanel = () => {
       await setFormikState(state),
     // TODO: Two instances of channel listener, causing duplicate values to be set on state hook
     [EVT_ON_SUBMIT]: async (values: Values) =>
-      await setSubmittedValues([...submittedValues, values]),
+      await setSubmittedValues([...submittedValues, values])
   });
 
   const {
@@ -129,7 +129,7 @@ export const FormikPanel = () => {
     // status,
     isValidating,
     isSubmitting,
-    submitCount,
+    submitCount
   } = formikState;
 
   return (
