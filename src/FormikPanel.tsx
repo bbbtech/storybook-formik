@@ -1,6 +1,6 @@
 import React, { CSSProperties, useState } from 'react';
 import { FormikState } from 'formik';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { useChannel } from '@storybook/api';
 import { STORY_RENDERED } from '@storybook/core-events';
 
