@@ -167,8 +167,7 @@ has any good examples then please do submit them.
 
 ## Contributing
 
-
-This is some great new informaiton
+More changes to the users feature
 
 ### Development
 
