@@ -10,7 +10,7 @@ import {
 
 export { DecoratorParams } from './shared';
 
-const users = ["cal", "bhish"];
+const users = ["cal", "bhish", "john"];
 
 export const withFormik = makeDecorator({
   name: 'withFormik',
