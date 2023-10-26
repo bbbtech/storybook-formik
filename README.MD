@@ -167,6 +167,9 @@ has any good examples then please do submit them.
 
 ## Contributing
 
+
+This is some great new informaiton
+
 ### Development
 
 You can test changes by building the package locally. The flow would be something like this:
