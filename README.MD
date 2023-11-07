@@ -167,6 +167,8 @@ has any good examples then please do submit them.
 
 ## Contributing
 
+More changes to the users feature
+
 ### Development
 
 You can test changes by building the package locally. The flow would be something like this:
