@@ -9,8 +9,8 @@ addons.register(ADDON_ID, () => {
   addons.add(PANEL_ID, {
     type: types.PANEL,
     title: 'Formik',
-    render: ({ active, key }) => (
-      <AddonPanel active={!!active} key={key}>
+    render: ({ active }) => (
+      <AddonPanel active={!!active}>
         <FormikPanel />
       </AddonPanel>
     ),
