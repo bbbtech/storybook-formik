@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { ComponentStory } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React, { FC } from 'react';
 import withFormik from '../dist/esm';
 import {
@@ -21,7 +21,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Template: ComponentStory<FC<PersonalInfo>> = args => {
+const Template: StoryFn<FC<PersonalInfo>> = args => {
   return <PersonalInfoSubForm />;
 };
 

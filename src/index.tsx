@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
-import { makeDecorator, useArgs, addons } from '@storybook/addons';
+import { addons } from '@storybook/manager-api';
+import { makeDecorator, useArgs } from '@storybook/preview-api';
 import {
   ConfigWithoutExtra,
   EVT_ON_SUBMIT,
