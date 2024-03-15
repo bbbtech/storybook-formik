@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import { FormikState } from 'formik';
 import { JSONTree } from 'react-json-tree';
-import { useChannel } from '@storybook/api';
+import { useChannel } from '@storybook/manager-api';
 import { STORY_RENDERED } from '@storybook/core-events';
 
 import { EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
