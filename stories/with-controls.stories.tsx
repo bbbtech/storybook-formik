@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
-import { ComponentStory } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React, { FC } from 'react';
 import withFormik from '../dist/esm';
 import {
   PersonalInfo,
   personalInfoInitialValues,
   PersonalInfoSubForm,
-  personalInfoValidationSchema
+  personalInfoValidationSchema,
 } from './example';
 
 const meta: Meta = {
@@ -15,13 +15,13 @@ const meta: Meta = {
   args: personalInfoInitialValues,
   parameters: {
     formik: {
-      validationSchema: personalInfoValidationSchema
-    }
-  }
+      validationSchema: personalInfoValidationSchema,
+    },
+  },
 };
 export default meta;
 
-const Template: ComponentStory<FC<PersonalInfo>> = args => {
+const Template: StoryFn<FC<PersonalInfo>> = _ => {
   return <PersonalInfoSubForm />;
 };
 

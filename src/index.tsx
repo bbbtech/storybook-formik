@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { Formik, Form } from 'formik';
-import { makeDecorator, useArgs, addons } from '@storybook/addons';
+import { makeDecorator, useArgs } from '@storybook/preview-api';
+import { addons } from '@storybook/manager-api';
 import {
   ConfigWithoutExtra,
   EVT_ON_SUBMIT,
@@ -56,7 +57,7 @@ export const withFormik = makeDecorator({
             updateArgs(props.values);
           }, [hasArgs, props.values]);
 
-          return <Form>{getStory(context)}</Form>;
+          return <Form>{getStory(context) as ReactNode}</Form>;
         }}
       </Formik>
     );

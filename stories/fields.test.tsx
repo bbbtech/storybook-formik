@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { composeStories } from '@storybook/testing-react';
+import { composeStories } from '@storybook/react';
 
 import * as stories from './fields.stories';
 
@@ -11,7 +11,7 @@ describe('subforms', () => {
   test('renders correctly from the story using Formik decorator', () => {
     render(<MyTextInput />);
     expect(
-      screen.getByText('Describe formik in 80 characters')
+      screen.getByText('Describe formik in 80 characters'),
     ).toBeInTheDocument();
   });
 });
