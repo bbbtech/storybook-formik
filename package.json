@@ -22,8 +22,8 @@
     "deploy": "npm run build-storybook && gh-pages -d build-sb",
     "preversion": "npm run clean && npm run build && npm run deploy",
     "postversion": "git push && git push --tags && npm publish",
-    "format": "prettier --write  --trailing-comma es5 --single-quote 'src/**/*' 'README.md'",
-    "format:check": "prettier --check --trailing-comma es5 --single-quote 'src/**/*' 'README.md'",
+    "format": "prettier --write  --trailing-comma es5 --single-quote 'src/**/*' 'README.MD'",
+    "format:check": "prettier --check --trailing-comma es5 --single-quote 'src/**/*' 'README.MD'",
     "test": "jest"
   },
   "publishConfig": {
