@@ -110,7 +110,7 @@ type Values = any;
 
 export const FormikPanel = memo(({ active }: { active?: boolean }) => {
   const [formikState, setFormikState] = useState<Partial<FormikState<Values>>>(
-    {},
+    {}
   );
   const [submittedValues, setSubmittedValues] = useState<Values[]>([]);
 
@@ -123,7 +123,7 @@ export const FormikPanel = memo(({ active }: { active?: boolean }) => {
       [EVT_ON_SUBMIT]: async (values: Values) =>
         await setSubmittedValues([...submittedValues, values]),
     },
-    [],
+    []
   );
 
   const { values, errors, touched, isValidating, isSubmitting, submitCount } =
