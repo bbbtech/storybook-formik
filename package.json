@@ -11,6 +11,8 @@
   "module": "dist/esm/index.js",
   "typings": "dist/types/index.d.ts",
   "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "rm -rf build-sb && storybook build",
     "clean": "rm -rf dist",
     "build": "npm run build:esm && npm run build:cjs",
     "build:watch": "concurrently \"npm run build:esm -- --watch\" \"npm run build:cjs -- --watch\"",
@@ -20,8 +22,6 @@
     "deploy": "npm run build-storybook && gh-pages -d build-sb",
     "preversion": "npm run clean && npm run build && npm run deploy",
     "postversion": "git push && git push --tags && npm publish",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "rm -rf build-sb && storybook build -o build-sb",
     "format": "prettier --write  --trailing-comma es5 --single-quote 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "format:check": "prettier --check --trailing-comma es5 --single-quote 'src/**/*' 'test/**/*' 'README.md' '/docs/**/*.md'",
     "test": "jest"
@@ -29,10 +29,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist/**/*",
-    "register.js"
-  ],
+  "files": ["dist/**/*", "manager.js"],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",
@@ -45,9 +42,10 @@
     "@babel/preset-typescript": "^7.26.0",
     "@storybook/addon-essentials": "^8.4.3",
     "@storybook/addon-links": "^8.4.3",
+    "@storybook/builder-vite": "^8.4.3",
     "@storybook/components": "^8.4.3",
     "@storybook/react": "^8.4.3",
-    "@storybook/react-webpack5": "^8.4.3",
+    "@storybook/react-vite": "^8.4.4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.14",
@@ -56,8 +54,6 @@
     "@types/react-dom": "^18.3.1",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/testing-library__jest-dom": "^5.14.9",
-    "@types/yup": "^0.32.0",
-    "babel-loader": "^9.2.1",
     "concurrently": "^9.1.0",
     "formik": "^2.4.6",
     "gh-pages": "^6.2.0",
@@ -85,9 +81,11 @@
   "dependencies": {
     "@storybook/core-events": "^8.4.3",
     "@storybook/manager-api": "^8.4.3",
+    "@vitejs/plugin-react": "^4.3.3",
     "jest-environment-jsdom": "^29.7.0",
     "react-json-tree": "^0.19.0",
-    "ts-loader": "^9.5.1"
+    "ts-loader": "^9.5.1",
+    "vite": "^5.4.11"
   },
   "storybook": {
     "icon": "https://pbs.twimg.com/profile_images/1148688127252471810/-UcA36Bw_400x400.png",

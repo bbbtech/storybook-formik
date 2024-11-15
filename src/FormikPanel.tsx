@@ -1,9 +1,10 @@
-import React, { CSSProperties, useState } from 'react';
-import { FormikState } from 'formik';
-import { JSONTree } from 'react-json-tree';
-import { useChannel } from '@storybook/manager-api';
 import { STORY_RENDERED } from '@storybook/core-events';
+import { useChannel } from '@storybook/manager-api';
+import { FormikState } from 'formik';
+import React, { CSSProperties, memo, useState } from 'react';
+import { JSONTree } from 'react-json-tree';
 
+import { AddonPanel } from '@storybook/components';
 import { EVT_ON_SUBMIT, EVT_RENDER, EVT_SUBMIT } from './shared';
 
 const trafficLightStyle: CSSProperties = {
@@ -37,8 +38,8 @@ const BooleanState = ({ name, value }: { name: string; value?: boolean }) => (
         value === undefined
           ? {}
           : value === true
-          ? booleanStateStyle.trafficLightTrue
-          : booleanStateStyle.trafficLightFalse
+            ? booleanStateStyle.trafficLightTrue
+            : booleanStateStyle.trafficLightFalse
       }
     >
       {value === undefined && '?'}
@@ -107,33 +108,29 @@ const eightiesTheme = {
 
 type Values = any;
 
-export const FormikPanel = () => {
+export const FormikPanel = memo(({ active }: { active?: boolean }) => {
   const [formikState, setFormikState] = useState<Partial<FormikState<Values>>>(
-    {}
+    {},
   );
   const [submittedValues, setSubmittedValues] = useState<Values[]>([]);
 
-  const emit = useChannel({
-    [STORY_RENDERED]: async id => await setSubmittedValues([]),
-    [EVT_RENDER]: async (state: FormikState<Values>) =>
-      await setFormikState(state),
-    // TODO: Two instances of channel listener, causing duplicate values to be set on state hook
-    [EVT_ON_SUBMIT]: async (values: Values) =>
-      await setSubmittedValues([...submittedValues, values]),
-  });
+  const emit = useChannel(
+    {
+      [STORY_RENDERED]: async id => await setSubmittedValues([]),
+      [EVT_RENDER]: async (state: FormikState<Values>) =>
+        await setFormikState(state),
+      // TODO: Two instances of channel listener, causing duplicate values to be set on state hook
+      [EVT_ON_SUBMIT]: async (values: Values) =>
+        await setSubmittedValues([...submittedValues, values]),
+    },
+    [],
+  );
 
-  const {
-    values,
-    errors,
-    touched,
-    // status,
-    isValidating,
-    isSubmitting,
-    submitCount,
-  } = formikState;
+  const { values, errors, touched, isValidating, isSubmitting, submitCount } =
+    formikState;
 
   return (
-    <>
+    <AddonPanel active={!!active}>
       <style dangerouslySetInnerHTML={{ __html: injectCss }} />
       <div style={style.container}>
         <div style={style.header}>
@@ -168,6 +165,6 @@ export const FormikPanel = () => {
           */}
         </div>
       </div>
-    </>
+    </AddonPanel>
   );
-};
+});
