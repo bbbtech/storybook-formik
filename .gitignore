@@ -2,4 +2,6 @@
 node_modules
 dist
 build-sb
+storybook-static
+.DS_Store
 /build-storybook.log
