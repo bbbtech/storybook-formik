@@ -20,7 +20,7 @@
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "prepack": "npm run build",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static",
-    "preversion": "npm run clean && npm run build && npm run deploy",
+    "preversion": "npm run clean && npm run build",
     "postversion": "git push && git push --tags && npm publish",
     "format": "prettier --write  --trailing-comma es5 --single-quote 'src/**/*' 'README.MD'",
     "format:check": "prettier --check --trailing-comma es5 --single-quote 'src/**/*' 'README.MD'",
