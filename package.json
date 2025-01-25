@@ -1,6 +1,6 @@
 {
   "name": "@bbbtech/storybook-formik",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A storybook addon that allows you to use components in your stories that rely on Formik context and see internal Formik state in a panel.",
   "repository": {
     "type": "git",
@@ -29,7 +29,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist/**/*", "manager.js"],
+  "files": [
+    "dist/**/*",
+    "manager.js"
+  ],
   "peerDependencies": {
     "formik": "^1.0.0||^2.0.0",
     "react": "*",
