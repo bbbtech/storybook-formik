@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { Formik, Form } from 'formik';
-import { makeDecorator, useArgs, addons } from '@storybook/addons';
+import { addons, makeDecorator, useArgs } from '@storybook/preview-api';
+import { Form, Formik } from 'formik';
+import React, { ReactNode, useEffect } from 'react';
 import {
   ConfigWithoutExtra,
   EVT_ON_SUBMIT,
@@ -16,8 +16,8 @@ export const withFormik = makeDecorator({
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
     const channel = addons.getChannel();
-    let submitter: () => void;
-    channel.on(EVT_SUBMIT, () => submitter && submitter());
+    let submitter: () => Promise<void>;
+    channel.on(EVT_SUBMIT, () => submitter?.());
     const formikConfig = parameters as ConfigWithoutExtra | undefined;
     const hasArgs = Object.keys(context.argTypes).length > 0;
     let initialValues =
@@ -42,7 +42,7 @@ export const withFormik = makeDecorator({
         {...formikConfig}
         initialValues={initialValues}
       >
-        {function FormWrap(props) {
+        {props => {
           channel.emit(EVT_RENDER, props);
           if (!submitter) {
             submitter = props.submitForm;
@@ -56,7 +56,7 @@ export const withFormik = makeDecorator({
             updateArgs(props.values);
           }, [hasArgs, props.values]);
 
-          return <Form>{getStory(context)}</Form>;
+          return <Form>{getStory(context) as ReactNode}</Form>;
         }}
       </Formik>
     );
